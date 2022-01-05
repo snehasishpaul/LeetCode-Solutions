@@ -1,0 +1,24 @@
+class Solution {
+    public String truncateSentence(String s, int k) {
+        String res = "";
+        
+        int count=0;
+        
+        for(char ch: s.toCharArray()) {
+            if(ch == ' ' && count++ == (k-1)){
+                break;
+            }
+            res = res + ch;
+        }
+        
+        return res;
+    }
+}
+
+
+PYTHON: 
+
+class Solution:
+    def truncateSentence(self, s: str, k: int) -> str:
+        words = s.split(' ')
+        return ' '.join(words[:k])

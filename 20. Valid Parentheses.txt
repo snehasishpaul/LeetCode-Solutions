@@ -1,0 +1,93 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        
+        boolean valid = true;
+        char res;
+        
+        for(int i=0; i<s.length(); i++) {
+            if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
+                stack.push(s.charAt(i));
+                continue;
+            }
+
+            if(s.charAt(i) == ')') {
+                if(!stack.isEmpty()) {
+                    res = stack.pop();
+                } else {
+                    return false;
+                }
+                
+                if(res == '(')
+                    valid = true;
+                else {
+                    valid = false;
+                    return valid;
+                }
+            }
+            if(s.charAt(i) == '}') {
+                if(!stack.isEmpty()) {
+                    res = stack.pop();
+                } else {
+                    return false;
+                }
+                if(res == '{'){
+                    valid = true;
+                }                    
+                else {
+                    valid = false;
+                    return valid;
+                }
+            }
+            if(s.charAt(i) == ']') {
+                if(!stack.isEmpty()) {
+                    res = stack.pop();
+                } else {
+                    return false;
+                }
+                if(res == '['){
+                    valid = true;
+                }                    
+                else {
+                    valid = false;
+                    return valid;
+                }
+            }     
+        }
+        
+        if(stack.isEmpty())
+            valid = true;
+        else
+            valid = false;
+        
+        
+        return valid;
+    }
+}
+
+
+
+Shorter Version:
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for(char c: s.toCharArray()) {
+            if(c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            }
+            else if(c == ')' && !stack.isEmpty() && stack.peek() == '(') {
+                stack.pop();
+            } else if(c == '}' && !stack.isEmpty() && stack.peek() == '{') {
+                stack.pop();
+            } else if(c == ']' && !stack.isEmpty() && stack.peek() == '[') {
+                stack.pop();
+            } else {
+                return false;
+            }    
+        }
+        
+        return stack.isEmpty();
+    }
+}

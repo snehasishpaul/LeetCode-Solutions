@@ -1,0 +1,52 @@
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        
+        int n = temperatures.length;
+        
+        Stack<Integer> stack = new Stack();
+        
+        int res[] = new int[n];
+        
+        for(int i=0; i<n; i++) {
+            while(!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
+                int prev = stack.pop();
+                
+                res[prev] = i - prev;
+            }
+            stack.push(i);
+        }
+        
+        return res;
+        
+    }
+}
+
+OR: brute force
+
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        int n = temperatures.length;
+        ArrayList<Integer> list = new ArrayList();
+        
+        for(int i=0; i<n; i++) {
+            int flag = 0;
+            for(int j=i+1; j<n; j++) {
+                if(temperatures[j] > temperatures[i]) {
+                    list.add(j-i);
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0 ) {
+                list.add(0);
+            }
+        }
+        
+        for(int k=0; k<n; k++) {
+            temperatures[k] = list.get(k);
+        }
+        
+        return temperatures;
+        
+    }
+}

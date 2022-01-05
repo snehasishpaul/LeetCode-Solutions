@@ -1,0 +1,23 @@
+import java.util.Collections;
+
+class Solution {
+    public int findGCD(int[] nums) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int n:nums) {
+            if (n < min) 
+                min = n;
+            if (n > max)
+                max = n;
+	    }
+        
+        while(min != max) {
+            if(max > min) {
+                max = max - min;
+            }
+            else
+                min = min - max;
+        }
+        return min;
+    }
+}

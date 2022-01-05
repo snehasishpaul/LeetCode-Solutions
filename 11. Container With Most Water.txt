@@ -1,0 +1,53 @@
+O(n^2)
+
+class Solution {
+    public int maxArea(int[] height) {
+        int max = 0;
+        int len = height.length;
+        int area = 0;
+        
+        for(int i=0; i<len-1; i++) {
+            for(int j=i+1; j<len; j++) {
+                int minH = Math.min(height[i],height[j]);
+                
+                area = minH * (j-i);
+                if(area > max)
+                    max = area;
+                
+                area = 0;
+            }
+        }
+        
+        return max;
+    }
+}
+
+
+O(n):
+
+class Solution {
+    public int maxArea(int[] height) {
+        int max = 0;
+        int len = height.length;
+        int left = 0;
+        int right = len-1;
+        
+        while(left < right) {
+            int indexDiff = right - left;
+            int minHeight = Math.min(height[left], height[right]);
+            int area = indexDiff * minHeight;
+            
+            if(area > max)
+                max = area;
+            
+            if(height[left] > height[right]) {
+                right = right - 1;
+            }
+            else
+                left = left + 1;
+            
+        }        
+        
+        return max;
+    }
+}

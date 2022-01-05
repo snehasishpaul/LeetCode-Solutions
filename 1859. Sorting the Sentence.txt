@@ -1,0 +1,26 @@
+class Solution {
+    public String sortSentence(String s) {
+        String str[] = s.split(" ");
+        
+        StringBuilder sb = new StringBuilder();
+        
+        // ArrayList<String> list = new ArrayList<String>();
+        
+        String res[] = new String[str.length];  
+        
+        for(String st: str){
+            int index = st.charAt(st.length() - 1)-'0';
+            int len = st.length() - 1;
+            String sub = st.substring(0, len);
+            res[index - 1] = sub;
+        }
+        
+        for(int j=0; j<res.length; j++) {
+            sb.append(res[j]);
+            sb.append(" ");
+        }
+        
+        return sb.toString().trim();
+        
+    }
+}
